@@ -1,0 +1,15 @@
+current directory: /home/rails/Desktop/geek/practice/TicTacToe/vendor/bundle/ruby/2.6.0/gems/websocket-driver-0.7.4/ext/websocket-driver
+/home/rails/.rvm/rubies/ruby-2.6.5/bin/ruby -I /home/rails/.rvm/rubies/ruby-2.6.5/lib/ruby/site_ruby/2.6.0 -r ./siteconf20210607-45342-11wogka.rb extconf.rb
+creating Makefile
+
+current directory: /home/rails/Desktop/geek/practice/TicTacToe/vendor/bundle/ruby/2.6.0/gems/websocket-driver-0.7.4/ext/websocket-driver
+make "DESTDIR=" clean
+
+current directory: /home/rails/Desktop/geek/practice/TicTacToe/vendor/bundle/ruby/2.6.0/gems/websocket-driver-0.7.4/ext/websocket-driver
+make "DESTDIR="
+compiling websocket_mask.c
+linking shared-object websocket_mask.so
+
+current directory: /home/rails/Desktop/geek/practice/TicTacToe/vendor/bundle/ruby/2.6.0/gems/websocket-driver-0.7.4/ext/websocket-driver
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 websocket_mask.so ./.gem.20210607-45342-1uskklj
