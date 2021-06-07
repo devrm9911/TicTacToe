@@ -1,0 +1,87 @@
+// Place all the styles related to the Game controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.game {
+  width: 620px;
+  height: 620px;
+  margin: 0 auto;
+  font-family: "Montserrat", sans-serif;
+  text-align: center;
+
+  // @media screen and (max-device-width: 768px){
+  //   width: 90vw;
+  //   height: 90vw;
+  // }
+  // @media screen and (max-device-width: 767px){
+  //   font-size: 5em;
+  // }
+
+  .title {
+    font-size: 42px;
+  }
+
+  .board {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+
+    .cell {
+      float: left;
+      width: 33.3333333333%;
+      height: 33.3333333333%;
+      box-sizing: border-box;
+      font-family: FontAwesome;
+      font-size: 130px;
+      background: #f2ebbf;
+      border-radius: 10px;
+
+      &:nth-child(-n + 3) {
+        border-bottom: 5px solid #f3b562;
+      }
+
+      &:nth-child(n + 7) {
+        border-top: 5px solid #f3b562;
+      }
+
+      &:nth-child(3n + 1) {
+        border-right: 5px solid #f3b562;
+      }
+
+      &:nth-child(3n + 3) {
+        border-left: 5px solid #f3b562;
+      }
+    }
+
+    .x:before {
+      content: "x";
+      color: #8cbeb2;
+    }
+
+    .o:before {
+      content: "o";
+      color: #5c4b51;
+    }
+  }
+
+  .message-bar {
+    p {
+      font-size: 24px;
+    }
+  }
+
+  .reset {
+    background: #f06060;
+    color: white;
+    font-size: 30px;
+    width: 200px;
+    margin: 0 auto;
+    padding: 10px 10px 10px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background: darken(#f06060, 5%);
+    }
+  }
+}
