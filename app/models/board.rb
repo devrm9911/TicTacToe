@@ -1,8 +1,10 @@
-class Board
-  attr_accessor :cells
-  
-  def initialize(cells: nil)
-    @cells = cells || Array.new(9)
+class Board < ApplicationRecord
+  has_many :games
+
+  def self.build
+    board = Board.create!
+    board.update(cells: Array.new(9))
+    board
   end
 
   def rows

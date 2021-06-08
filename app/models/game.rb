@@ -1,20 +1,10 @@
 class Game < ApplicationRecord
-  attr_accessor :board
 
-  before_create :randomize_markers, :randomize_starting_player
+  belongs_to :board
 
   def self.setup
-    game = self.create(board: Board.new)
+    board = Board.build
+    game = self.create(board_id: board.id, player1: "x", active: "player1")
     return game
-  end
-
-  private
-
-  def randomize_markers
-    self.player1, self.player2 = ["x", "o"].shuffle
-  end
-
-  def randomize_starting_player
-    self.active = [self.player1, self.player2].sample
   end
 end

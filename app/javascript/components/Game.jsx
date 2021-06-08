@@ -3,22 +3,7 @@ import Button from "react-bootstrap/Button";
 import Board from "./Board";
 import MessageBar from "./MessageBar";
 
-const Game = (props) => {
-  const [gameState, setGameState] = useState({
-    gameover: null,
-    player1: null,
-    player2: null,
-    activePlayer: null,
-    board: null,
-    message: null,
-  });
-
-  const newGame = () => {
-    $.get("/new", (response) => {
-      setGameState({ ...response });
-    });
-  };
-
+const Game = ({ gameState, setGameState }) => {
   const placeMarker = (key) => {
     let board = gameState.board;
     const invalid = board[key];
@@ -65,9 +50,10 @@ const Game = (props) => {
 
   return (
     <>
+      {gameState?.player1 && !gameState?.player2 && (
+        <div>Please tell opponent to enter Game Id: {gameState.id}</div>
+      )}
       <div className="game">
-        <h1 className="title">Tic Tac Toe</h1>
-        <div onClick={() => newGame()}>Start New Game</div>
         <Board boardState={gameState.board} placeMarker={placeMarker} />
         <MessageBar message={gameState.message} />
         <ResetButton />

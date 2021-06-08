@@ -16,6 +16,12 @@ class GameController < ApplicationController
     render json: GameStateFormatter.format(game)
   end
 
+  def join
+    game = Game.find(params[:id])
+    game.update(player2: "o")
+    render json: GameStateFormatter.format(game)
+  end
+
   private
 
   def board_params
