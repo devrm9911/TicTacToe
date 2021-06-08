@@ -2,6 +2,7 @@ import Button from "react-bootstrap/Button";
 import React, { useState } from "react";
 import { Col, Row, Form } from "react-bootstrap";
 import Game from "./Game";
+import gameChannel from "../channels/game_channel";
 
 const Join = (props) => {
   const [view, setView] = useState();
@@ -16,9 +17,7 @@ const Join = (props) => {
   });
 
   const newGame = () => {
-    $.get("/new", (response) => {
-      setGameState({ ...response });
-    });
+    gameChannel.startNewGame();
     setView("newGame");
   };
 
