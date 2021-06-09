@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { Col, Row, Form } from "react-bootstrap";
 import Game from "./Game";
 import gameChannel from "../channels/game_channel";
+import { ActionCable } from "react-actioncable-provider";
+import { API_ROOT } from "../packs/index";
 
 const Join = (props) => {
   const [view, setView] = useState();
@@ -17,8 +19,10 @@ const Join = (props) => {
   });
 
   const newGame = () => {
-    gameChannel.startNewGame();
+    $.get("/new", (response) => {});
+    // localStorage.setItem("player1", true);
     setView("newGame");
+    setTimeout(() => {}, 5000);
   };
 
   const ControllerMenu = () => (
@@ -36,14 +40,10 @@ const Join = (props) => {
         {
           id: gameId,
         },
-        (data, status) => {
-          if (status === "success") {
-            console.log(data);
-            setGameState({ ...data });
-            setView("newGame");
-          }
-        }
+        (data, status) => {}
       );
+      // localStorage.setItem("player1", true);
+      setView("newGame");
     };
 
     return (
@@ -83,7 +83,7 @@ const Join = (props) => {
     }
   };
 
-  return showPage(view);
+  return <>{showPage(view)}</>;
 };
 
 export default Join;

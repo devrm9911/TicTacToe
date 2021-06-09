@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   get '/new', to: 'game#new'
   get '/move', to: 'game#move'
   get '/join', to: 'game#join'
+  mount ActionCable.server => '/cable'
 end

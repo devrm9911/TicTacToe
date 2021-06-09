@@ -4,7 +4,9 @@ class GameController < ApplicationController
 
   def new
     game = Game.setup
-    render json: GameStateFormatter.format(game)
+    ActionCable.server.broadcast "game_channel", message: GameStateFormatter.format(game)
+    head :ok
+    # render json: GameStateFormatter.format(game)
   end
 
   def move
@@ -12,14 +14,15 @@ class GameController < ApplicationController
     game.board = Board.new(cells: board_params)
     # TOGGLE USER
     game.active = params[:activePlayer] === 'player1' ? game.player2 : game.player1
-
-    render json: GameStateFormatter.format(game)
+    ActionCable.server.broadcast "game_channel", message: GameStateFormatter.format(game)
+    head :ok
   end
 
   def join
     game = Game.find(params[:id])
     game.update(player2: "o")
-    render json: GameStateFormatter.format(game)
+    ActionCable.server.broadcast "game_channel", message: GameStateFormatter.format(game)
+    head :ok
   end
 
   private

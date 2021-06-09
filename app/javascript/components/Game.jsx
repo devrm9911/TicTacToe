@@ -2,22 +2,32 @@ import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Board from "./Board";
 import MessageBar from "./MessageBar";
+import { ActionCable } from "react-actioncable-provider";
 
 const Game = ({ gameState, setGameState }) => {
   const placeMarker = (key) => {
-    let board = gameState.board;
-    const invalid = board[key];
-    if (invalid) {
-      return;
+    if (
+      true
+      // (localStorage.getItem("player1") &&
+      //   gameState.activePlayer === "player1") ||
+      // (localStorage.getItem("player2") && gameState.activePlayer === "player2")
+    ) {
+      let board = gameState.board;
+      const invalid = board[key];
+      if (invalid) {
+        return;
+      }
+
+      board[key] =
+        gameState.activePlayer === "player1"
+          ? gameState.player1
+          : gameState.player2;
+
+      setGameState({ ...gameState, board: board });
+      updateMove();
+    } else {
+      console.log("Please wait for your turn");
     }
-
-    board[key] =
-      gameState.activePlayer === "player1"
-        ? gameState.player1
-        : gameState.player2;
-
-    setGameState({ ...gameState, board: board });
-    updateMove();
   };
 
   const updateMove = () => {
@@ -30,7 +40,6 @@ const Game = ({ gameState, setGameState }) => {
       },
       (data, status) => {
         if (status === "success") {
-          setGameState({ ...data });
         }
       }
     );
@@ -50,6 +59,12 @@ const Game = ({ gameState, setGameState }) => {
 
   return (
     <>
+      <ActionCable
+        channel={{ channel: "GameChannel" }}
+        onReceived={(response) => {
+          setGameState(response?.message);
+        }}
+      />
       {gameState?.player1 && !gameState?.player2 && (
         <div>Please tell opponent to enter Game Id: {gameState.id}</div>
       )}
