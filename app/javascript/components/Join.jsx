@@ -20,7 +20,7 @@ const Join = (props) => {
 
   const newGame = () => {
     $.get("/new", (response) => {});
-    // localStorage.setItem("player1", true);
+    localStorage.setItem("player1", true);
     setView("newGame");
     setTimeout(() => {}, 5000);
   };
@@ -42,7 +42,7 @@ const Join = (props) => {
         },
         (data, status) => {}
       );
-      // localStorage.setItem("player1", true);
+      localStorage.setItem("player2", true);
       setView("newGame");
     };
 
