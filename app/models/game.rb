@@ -1,5 +1,4 @@
 class Game < ApplicationRecord
-
   belongs_to :board
 
   def self.setup
